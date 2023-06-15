@@ -4,6 +4,14 @@ import { UserModel } from "../../database/allModels";
 
 const Router = express.Router();
 
+/**
+ * Route     /signup
+ * Des       Create new account
+ * Params    none
+ * Access    Public
+ * Method    POST
+ */
+
 Router.post("/signup", async (req, res) => {
   try {
     await UserModel.findByEmailAndPhone(req.body.credentials);
@@ -20,6 +28,14 @@ Router.post("/signup", async (req, res) => {
     });
   }
 });
+
+/**
+ * Route     /login
+ * Des       Login to existing account
+ * Params    none
+ * Access    Public
+ * Method    POST
+ */
 
 Router.post("/login", async (req, res) => {
   try {
