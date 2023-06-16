@@ -1,6 +1,7 @@
 import express from "express";
 import { UserModel } from "../../database/allModels";
 import passport from "passport";
+import { validateId, validateUserData } from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -19,7 +20,7 @@ Router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 
 });
@@ -35,12 +36,14 @@ Router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
 Router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
+    await validateId(req.params);
+
     const getUser = await UserModel.findById(_id);
 
     if (!getUser) {
       return res.status(404).json({
-        error: "User not found",
-      })
+        message: "User not found",
+      });
     }
     const { fullName } = getUser;
 
@@ -48,7 +51,7 @@ Router.get("/:_id", async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 
@@ -63,7 +66,10 @@ Router.get("/:_id", async (req, res) => {
 Router.put("/update/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
     const { _id } = req.params;
+    await validateId(req.params);
+
     const { userData } = req.body;
+    await validateUserData(req.body);
 
     userData.password = undefined;
 
@@ -81,7 +87,7 @@ Router.put("/update/:_id", passport.authenticate("jwt", { session: false }), asy
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 

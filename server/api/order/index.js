@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { OrderModel } from "../../database/allModels";
+import { validateOrderDetails } from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -19,14 +20,14 @@ Router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
 
     if (!getOrders) {
       return res.status(404).json({
-        error: "No order found",
-      })
+        message: "No order found",
+      });
     }
     return res.json({ getOrders });
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 
@@ -42,6 +43,7 @@ Router.put("/new", passport.authenticate("jwt", { session: false }), async (req,
   try {
     const { user } = req;
     const { orderDetails } = req.body;
+    await validateOrderDetails(req.body);
 
     const addNewOrder = await OrderModel.findOneAndUpdate(
       {
@@ -61,7 +63,7 @@ Router.put("/new", passport.authenticate("jwt", { session: false }), async (req,
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 

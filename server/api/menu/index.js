@@ -1,5 +1,6 @@
 import express from "express";
 import { MenuModel, ImageModel } from "../../database/allModels";
+import { validateId } from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -14,11 +15,13 @@ const Router = express.Router();
 Router.get("/list/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
+    await validateId(req.params);
+
     const menus = await MenuModel.findById(_id);
 
     if (!menus) {
       return res.status(404).json({
-        error: "No menus present for this restaurant",
+        message: "No menus present for this restaurant",
       })
     }
 
@@ -41,11 +44,13 @@ Router.get("/list/:_id", async (req, res) => {
 Router.get("/image/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
+    await validateId(req.params);
+
     const menuImages = await ImageModel.findById(_id);
 
     if (!menuImages) {
       return res.status(404).json({
-        error: "No menu images found",
+        message: "No menu images found",
       })
     }
 

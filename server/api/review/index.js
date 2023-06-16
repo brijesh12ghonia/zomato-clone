@@ -1,6 +1,8 @@
 import express from "express";
 import passport from "passport";
 import { ReviewModel } from "../../database/allModels";
+import { validateId } from "../../validation/common.validation";
+import { validateReviewData, validateId } from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -15,6 +17,7 @@ const Router = express.Router();
 Router.get("/:resId", async (req, res) => {
   try {
     const { resId } = req.params;
+    await validateId(req.params);
 
     const reviews = await ReviewModel.find({ restaurants: resId }).sort({
       createdAt: -1,
@@ -24,7 +27,7 @@ Router.get("/:resId", async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 
@@ -40,6 +43,7 @@ Router.post("/new", passport.authenticate("jwt", { session: false }), async (req
   try {
     const { _id } = req.user;
     const { reviewData } = req.body;
+    await validateReviewData(req.body);
 
     const review = await ReviewModel.create({ ...reviewData, user: _id });
 
@@ -47,7 +51,7 @@ Router.post("/new", passport.authenticate("jwt", { session: false }), async (req
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 
@@ -62,6 +66,8 @@ Router.post("/new", passport.authenticate("jwt", { session: false }), async (req
 Router.delete("/delete/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
     const { id } = req.params;
+    await validateId(req.params);
+
     const { user } = req;
 
     const data = await ReviewModel.findOneAndDelete({
@@ -83,7 +89,7 @@ Router.delete("/delete/:id", passport.authenticate("jwt", { session: false }), a
   } catch (error) {
     return res.status(500).json({
       error: error.message,
-    })
+    });
   }
 });
 
