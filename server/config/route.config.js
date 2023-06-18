@@ -1,13 +1,16 @@
 import JwtPassport from "passport-jwt";
+import dotenv from "dotenv";
 
 import { UserModel } from "../database/allModels";
+
+dotenv.config();
 
 const JwtStrategy = JwtPassport.Strategy;
 const ExtractJwt = JwtPassport.ExtractJwt;
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "1a2b3c4d5e6f7g",
+  secretOrKey: process.env.JWT_SECRET_KEY,
 };
 
 export default (passport) => {

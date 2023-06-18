@@ -6,6 +6,7 @@ import session from "express-session";
 
 //private routes authorization configuration
 import privateRouteConfig from "./config/route.config";
+import googleAuthConfig from "./config/google.config";
 
 //database connection
 import ConnectDB from "./database/connection";
@@ -22,6 +23,7 @@ import Image from "./api/image";
 dotenv.config();
 
 privateRouteConfig(passport);
+googleAuthConfig(passport);
 
 const zomato = express();
 
