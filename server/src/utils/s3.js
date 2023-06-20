@@ -9,11 +9,16 @@ const s3Bucket = new S3({
   region: "ap-south-1",
 });
 
-export const s3Upload = (options) => {
-  return new Promise((resolve, reject) =>
-    s3Bucket.upload(options, (error, data) => {
-      if (error) return reject(error);
-      return resolve(data);
-    })
-  );
+export const s3Upload = async (files) => {
+  const params = files.map(file => {
+    return {
+      Bucket: process.env.BUCKET_NAME,
+      Key: file.originalname,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+      ACL: "public-read", // Access Control List
+    };
+  });
+
+  return await Promise.all(params.map(param => s3Bucket.upload(param).promise()));
 };
