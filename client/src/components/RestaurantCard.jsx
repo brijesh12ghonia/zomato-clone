@@ -19,11 +19,11 @@ const RestaurantCard = (props) => {
         <div className="w-full relative">
           <div className="w-full bottom-4 flex items-end justify-between">
             <div className="flex flex-col gap-2 items-start absolute">
-              { props.isPro && (
+              {/* { props.isPro && (
                 <span className="bg-zomato-400 text-white px-2 py-1 rounded text-sm">
                   Pro extra $250% off
                 </span>
-              ) }
+              ) } */}
               { props.isOff && (
                 <span className="bg-blue-600 text-white px-2 py-1 mb-4 rounded text-sm">
                   $50% OFF up to 100
