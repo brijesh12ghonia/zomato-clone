@@ -22,7 +22,7 @@ const DeliveryLgCard = ({ image, title }) => {
     <>
       <div className="hidden lg:block rounded-md w-full cursor-pointer">
         <div className="w-full h-26">
-          <img className="w-full h-full object-center  rounded-full" src={ image } alt={ title } />
+          <img className="w-full h-full object-center rounded-full" src={ image } alt={ title } />
         </div>
         <div>
           <h3 className="text-xl my-2 text-center font-medium text-gray-800">

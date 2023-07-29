@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 //components
 import DeliveryCarousel from "./DeliveryCarousel";
+import RestaurantCarousel from "./RestaurantCarousel";
 import RestaurantCard from "../RestaurantCard";
 
 const Delivery = () => {
@@ -37,6 +38,7 @@ const Delivery = () => {
   return (
     <>
       <DeliveryCarousel />
+      <RestaurantCarousel />
       <h1 className="text-xl mt-4 mb-2 md:mt-8 md:text-3xl md:font-semibold text-gray-800">
         Delivery Restaurants in Mumbai
       </h1>

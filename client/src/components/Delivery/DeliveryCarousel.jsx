@@ -58,6 +58,13 @@ const DeliveryCarousel = () => {
     },
   ];
 
+  const restaurants = [
+    {
+      image: "https://b.zmtcdn.com/data/brand_creatives/logos/0e6f4a6a6d54c88d548abaa04a0227bc_1625164827.png",
+      title: "McDonald's",
+    },
+  ];
+
   const slideConfig = {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -85,7 +92,7 @@ const DeliveryCarousel = () => {
 
   return (
     <>
-      <h1 className="text-xl mt-4 md:mt-8 md:text-3xl md:font-semibold mb-5 text-gray-800">
+      <h1 className="text-xl mt-4 md:mt-8 md:text-3xl md:font-semibold mb-10 text-gray-800">
         Inspiration for your first order
       </h1>
       <div className="lg:hidden grid grid-cols-4 md:grid-cols-4 gap-3 justify-center">

@@ -1,7 +1,6 @@
 import React from "react";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
-import ReactStart from "react-rating-stars-component";
 
 const NutritionCard = (props) => {
   return (
@@ -16,9 +15,9 @@ const NutritionCard = (props) => {
               <img src="https://i.pinimg.com/736x/e4/1f/f3/e41ff3b10a26b097602560180fb91a62.jpg" alt="" className="w-full h-full" />
             </div>
             <ReactStars count={ 5 } size={ 16 } isHalf={ true } value={ 3 } emptyIcon={ <BsStar /> } halfIcon={ <BsStarHalf /> } fullIcon={ <BsStarFill /> } edit={ false } />
-            <span className="text-gray-400">15</span>
+            <span className="text-gray-500">15</span>
           </div>
-          <h3 className="text-xl font-bold text-gray-400">
+          <h3 className="text-xl font-bold text-gray-500">
             Burn - Weight Balance
           </h3>
           <p className="text-sm font-light text-gray-600">
@@ -29,10 +28,10 @@ const NutritionCard = (props) => {
           </div>
           <div>
             <span className="flex gap-2 items-center">
-              <s className="text-gray-400 font-light">₹600</s>
+              <s className="text-gray-500 font-light">₹600</s>
               <strong>₹320</strong>
             </span>
-            <p className="text-gray-400 font-light">Month Pack - 30 Capsules</p>
+            <p className="text-gray-500 font-light">Month Pack - 30 Capsules</p>
           </div>
         </div>
       </div>
