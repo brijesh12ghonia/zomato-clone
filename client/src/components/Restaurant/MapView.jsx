@@ -14,7 +14,7 @@ const MapView = (props) => {
       <div>
         <h4 className="text-xl font-normal">Direction</h4>
         <div className="w-full h-48">
-          <MapContainer center={ props.mapLocation } zoom={ 13 } scrollWheelZoom={ false } className="h-full" >
+          <MapContainer center={ props.mapLocation } zoom={ 13 } scrollWheelZoom={ false } className="h-full z-10" >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
