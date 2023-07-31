@@ -170,7 +170,7 @@ const Overview = () => {
             <MapView
               title={ restaurant.name }
               phno={ restaurant.contactNumber }
-              mapLocation={ restaurant.mapLocation }
+              mapLocation={ getLatLong("19.023086122970906, 72.84211287877385") }
               address={ restaurant.address }
             />
           </div>
@@ -183,7 +183,7 @@ const Overview = () => {
         <MapView
           title={ restaurant.name }
           phno={ restaurant.contactNumber }
-          mapLocation={ getLatLong(restaurant.mapLocation) }
+          mapLocation={ getLatLong("19.023086122970906, 72.84211287877385") }
           address={ restaurant.address }
         />
       </aside>
