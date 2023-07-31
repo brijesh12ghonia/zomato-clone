@@ -1,32 +1,16 @@
 import React, { useState } from "react";
-import { IoMdArrowFropdown, IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
 import { IoMdArrowDropup, IoMdArrowDropright } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+
+// redux
+import { useSelector } from "react-redux";
 
 // components
 import FoodItem from "./FoodItem";
 
 const CartData = ({ toggle }) => {
-  const [ cart, setCart ] = useState([
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/703/3c053cbebc21e826b6571229dbaed703.png",
-      name: "Berrylicious",
-      rating: 4.5,
-      price: 788,
-      description: "Vanilla sponge layered with mix berry mousse coated with white glaze.",
-      quantity: 3,
-      totalPrice: 2364,
-    },
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/a5a/b02d22970afae939b4d216ede82fda5a.png",
-      name: "Almond Cookies",
-      rating: 4.5,
-      price: 172,
-      quantity: 1,
-      totalPrice: 172,
-      description: "Crispy & buttery indian style cookies coated with almonds.",
-    },
-  ]);
+  const cart = useSelector((glocalState) => glocalState.cart.cart);
   const navigate = useNavigate();
   const continueToCheckout = () => navigate("/checkout/orders");
 
@@ -58,26 +42,7 @@ const CartData = ({ toggle }) => {
 const CartContainer = () => {
   const [ isOpen, setIsOpen ] = useState(false);
 
-  const [ cart, setCart ] = useState([
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/703/3c053cbebc21e826b6571229dbaed703.png",
-      name: "Berrylicious",
-      rating: 4.5,
-      price: 788,
-      description: "Vanilla sponge layered with mix berry mousse coated with white glaze.",
-      quantity: 3,
-      totalPrice: 2364,
-    },
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/a5a/b02d22970afae939b4d216ede82fda5a.png",
-      name: "Almond Cookies",
-      rating: 4.5,
-      price: 172,
-      quantity: 1,
-      totalPrice: 172,
-      description: "Crispy & buttery indian style cookies coated with almonds.",
-    },
-  ]);
+  const cart = useSelector((glocalState) => glocalState.cart.cart);
 
   const toggleCart = () => setIsOpen((prev) => !prev);
   const closeCart = () => setIsOpen(false);

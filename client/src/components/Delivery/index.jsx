@@ -1,45 +1,29 @@
-import React, { useState } from "react";
-
-//components
-import DeliveryCarousel from "./DeliveryCarousel";
-import RestaurantCarousel from "./RestaurantCarousel";
+import React, { useState, useEffect } from "react";
 import RestaurantCard from "../RestaurantCard";
 
+// components
+import DeliveryCarousel from "./DeliveryCarousel";
+import RestaurantCarousel from "./RestaurantCarousel";
+
+// redux
+import { useSelector } from "react-redux";
+
 const Delivery = () => {
-  const [ restaurantList, setRestaurantList ] = useState([
-    {
-      _id: "124ksjf435245jv34fg1",
-      isPro: true,
-      isOff: true,
-      name: "Dale's Eden",
-      restaurantReviewValue: "3.3",
-      cuisine: [ "Bakery", "Desserts", "Mithai", "Street Food", "Fast Food" ],
-      averageCost: "100",
-    },
-    {
-      _id: "124ksjf435245jv34fg2",
-      isPro: true,
-      isOff: false,
-      name: "Maiz Mexican Kitchen",
-      restaurantReviewValue: "4.0",
-      cuisine: [ "Mexican", "Healthy Food", "Salad" ],
-      averageCost: "100",
-    },
-    {
-      _id: "124ksjf435245jv34fg3",
-      isPro: true,
-      isOff: true,
-      name: "La Pino'z Pizza",
-      restaurantReviewValue: "3.9",
-      cuisine: [ "Pizza", "Italian", "Fast Food", "Beverages", "Pasta" ],
-      averageCost: "100",
-    },
-  ]);
+  const [ restaurantList, setRestaurantList ] = useState([]);
+
+  const reduxState = useSelector(
+    (globalState) => globalState.restaurant.restaurants
+  );
+
+  useEffect(() => {
+    reduxState && setRestaurantList(reduxState);
+  }, [ reduxState ]);
+
   return (
     <>
       <DeliveryCarousel />
       <RestaurantCarousel />
-      <h1 className="text-xl mt-4 mb-2 md:mt-8 md:text-3xl md:font-semibold text-gray-800">
+      <h1 className="text-xl mt-4 mb-2 md:mt-8 md:text-3xl md:font-semibold">
         Delivery Restaurants in Mumbai
       </h1>
       <div className="grid gap-0 md:gap-2 md:grid-cols-2 grid-cols-1 lg:grid-cols-3">

@@ -15,11 +15,10 @@ const Router = express.Router();
 
 Router.get("/", async (req, res) => {
   try {
-    //http://localhost:4000/restaurant/?city=ncr
     const { city } = req.query;
     await validateRestaurantCity(req.query);
 
-    const restaurants = await RestaurantModel.findById({ city });
+    const restaurants = await RestaurantModel.find({ city });
 
     if (!restaurants) {
       res.status(404).json({
@@ -75,7 +74,7 @@ Router.get("/search/:searchString", async (req, res) => {
   try {
     const { searchString } = req.params;
     await validateSearchString(req.params);
-    
+
     const restaurants = await RestaurantModel.find({
       name: { $regex: searchString, $options: "i" },
     });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsShieldLockFill } from "react-icons/bs";
 
 // Layout
@@ -8,27 +8,13 @@ import CheckoutLayout from "../layouts/Checkout.layout";
 import FoodItem from "../components/Cart/FoodItem";
 import AddressList from "../components/Checkout/AddressList";
 
+// redux
+import { useSelector } from "react-redux";
+
 const Checkout = () => {
-  const [ cart, setCart ] = useState([
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/703/3c053cbebc21e826b6571229dbaed703.png",
-      name: "Berrylicious",
-      rating: 4.5,
-      price: 788,
-      description: "Vanilla sponge layered with mix berry mousse coated with white glaze.",
-      quantity: 3,
-      totalPrice: 2364,
-    },
-    {
-      image: "https://b.zmtcdn.com/data/dish_photos/a5a/b02d22970afae939b4d216ede82fda5a.png",
-      name: "Almond Cookies",
-      rating: 4.5,
-      price: 172,
-      quantity: 1,
-      totalPrice: 172,
-      description: "Crispy & buttery indian style cookies coated with almonds.",
-    },
-  ]);
+  const cart = useSelector((globalState) => globalState.cart.cart);
+  const user = useSelector((globalState) => globalState.user);
+  const restaurant = useSelector((globalState) => globalState.restaurant.selectedRestaurant.restaurants);
 
   const address = [
     {
@@ -44,7 +30,8 @@ const Checkout = () => {
   const payNow = () => {
     let options = {
       key: "rzp_test_IUIv3TT98KlJ4s",
-      amount: cart.reduce((total, current) => total + current.totalPrice, 0) * 100,
+      amount:
+        cart.reduce((total, current) => total + current.totalPrice, 0) * 100,
       currency: "INR",
       name: "Zomato Master",
       description: "Fast Delivery Service",
@@ -53,8 +40,8 @@ const Checkout = () => {
         console.log(data);
       },
       prefill: {
-        name: "Brijesh",
-        email: "text@email.com",
+        name: user.fullName,
+        email: user.email,
       },
       theme: {
         color: "#e23744",
@@ -73,8 +60,8 @@ const Checkout = () => {
         <div className="flex w-full flex-col gap-2 items-center">
           <h5 className="text-base tracking-wider">ORDER FROM</h5>
           <div className="flex w-full flex-col items-center text-gray-400">
-            <h4>Deliure & The Eatrium</h4>
-            <small>Mahim, Mumbai</small>
+            <h4>{ restaurant.name }</h4>
+            <small>{ restaurant.address }</small>
           </div>
           <div className="my-4 h-32 overflow-y-scroll px-4 flex flex-col gap-2 w-full md:w-3/5">
             { cart.map((item) => (

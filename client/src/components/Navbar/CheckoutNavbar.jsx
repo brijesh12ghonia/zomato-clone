@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 const CheckoutNavbar = () => {
-  const [ user ] = useState({
-    fullName: "Brijesh",
-  });
+  const user = useSelector((globalState) => globalState.user);
 
   const navigate = useNavigate();
 
@@ -19,17 +19,19 @@ const CheckoutNavbar = () => {
               onClick={ () => navigate(-1) }
             />
             <div className="w-28">
-              <img
-                src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
-                alt="logo"
-                className="w-full h-full"
-              />
+              <Link to="/">
+                <img
+                  src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
+                  alt="logo"
+                  className="w-full h-full"
+                />
+              </Link>
             </div>
             <div className="flex items-center justify-center gap-3">
               <div className="border border-gray-300 text-zomato-400 w-10 h-10 rounded-full overflow-hidden">
                 <img
-                  src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
-                  alt="avatar"
+                  src="/images/avatar.jpg"
+                  alt=""
                   className="w-full h-full rounded-full object-cover"
                 />
               </div>

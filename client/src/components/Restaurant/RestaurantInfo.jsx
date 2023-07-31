@@ -41,7 +41,7 @@ const RestaurantInfo = (props) => {
           { props.address }
         </h3>
         <div className="text-sm">
-          <span className="text-yellow-400 ">Open Now</span> - 11am - 8pm
+          <span className="text-yellow-400 ">Open Now</span> - { props.restaurantTimings }
           (Today)
         </div>
       </div>

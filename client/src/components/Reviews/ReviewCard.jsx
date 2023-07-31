@@ -13,12 +13,14 @@ const ReviewCard = (props) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-full">
-            <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="avatar" className="w-full h-full rounded-full object-cover" />
+            <img
+              src="/images/avatar.jpg"
+              alt="avatar"
+              className="w-full h-full rounded-full object-cover"
+            />
           </div>
           <div className="flex flex-col">
-            <h3 className="text-lg font-semibold">
-              { user }
-            </h3>
+            <h3 className="text-lg font-semibold">{ user }</h3>
             <small className="text-gray-500">
               5 Reviews &#8226; 3 Followers
             </small>
@@ -30,7 +32,7 @@ const ReviewCard = (props) => {
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
-          <span className="text-white text-xs font-bold bg-green-800 gap-1 px-2 py-1 rounded-lg flex items-center">
+          <span className="text-white text-xs bg-green-700 gap-2 px-2 py-1 rounded-lg flex items-center">
             { props.rating } <TiStarFullOutline />
           </span>
           <h5 className="font-regular uppercase">

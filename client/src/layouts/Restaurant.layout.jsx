@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TiStarOutline } from "react-icons/ti";
 import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri";
 import { BiBookmarkPlus } from "react-icons/bi";
@@ -12,33 +12,42 @@ import RestaurantInfo from "../components/Restaurant/RestaurantInfo";
 import Tabs from "../components/Restaurant/Tabs";
 import CartContainer from "../components/Cart/CartContainer";
 
+// redux
+import { useDispatch } from "react-redux";
+import { getSpecificRestaurant } from "../redux/reducers/restaurant/restaurant.action";
+import { getImage } from "../redux/reducers/image/image.action";
+
 const RestaurantLayout = ({ children: Component, ...props }) => {
   const [ restaurant, setRestaurant ] = useState({
-    images: [
-      {
-        location: "https://b.zmtcdn.com/data/pictures/chains/5/18140605/531c128c78ea7481b8c1d2321cb73404.jpg",
-      },
-      {
-        location: "https://b.zmtcdn.com/data/pictures/chains/5/18140605/2176bece2c953f11ac571677b70c8cda.jpg",
-      },
-      {
-        location: "https://b.zmtcdn.com/data/reviews_photos/875/cd1fd7a5440851ea93d1a7d445523875_1580824229.jpg",
-      },
-      {
-        location: "https://b.zmtcdn.com/data/reviews_photos/351/63f4ad1dea84f9a6b5f22d8aa312f351_1580824230.jpg",
-      },
-      {
-        location: "https://b.zmtcdn.com/data/reviews_photos/70b/dcfe6d12adc66532d65b6d0fca8d270b_1580824232.jpg",
-      },
-    ],
-    name: "Deliure & The Eatrium",
-    cuisine: [ "Bakery", "Fast Food", "Pizza", "Sandwich", "Street Food", "Desserts", "Beverages", "Shake" ],
-    address: "Mahim, Mumbai",
-    restaurantRating: 3.9,
-    deliveryRating: 4.3,
+    images: [],
+    name: "",
+    cuisine: "",
+    address: "",
+    restaurantRating: 4.1,
+    deliveryRating: 3.2,
   });
 
+  const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getSpecificRestaurant(id)).then((data) => {
+      setRestaurant((prev) => ({
+        ...prev,
+        ...data.payload.restaurants,
+      }));
+
+      // dispatch(getImage(data.payload.restaurants.photos)).then((data) => {
+      //   setRestaurant((prev) => ({
+      //     ...prev,
+      //     images: data.payload.images,
+      //   }));
+      // });
+    });
+  }, []);
+
+  console.log("Hello", restaurant);
+
   return (
     <>
       <Navbar />

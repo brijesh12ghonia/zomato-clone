@@ -4,12 +4,11 @@ import { FaDirections } from "react-icons/fa";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const MapView = (props) => {
-  let latAndLong = props.mapLocation.toString();
   return (
     <>
       <div>
         <h4 className="text-xl font-normal">Call</h4>
-        <h5 className="text-zomato-400 font-medium">{ props.phno }</h5>
+        <h5 className="text-zomato-400 font-medium">+91{ props.phno }</h5>
       </div>
       <div>
         <h4 className="text-xl font-normal">Direction</h4>
@@ -30,7 +29,7 @@ const MapView = (props) => {
           <MdContentCopy /> Copy
         </button>
         <a
-          href={ `https://www.google.com/maps/dir/?api=1&destination=${latAndLong}` } target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-2 text-gray-700 border border-gray-400 rounded-lg" >
+          href={ `https://www.google.com/maps/dir/?api=1&destination=${props.mapLocation}` } target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-2 text-gray-700 border border-gray-400 rounded-lg" >
           <span className="text-zomato-400">
             <FaDirections />
           </span>{ " " }
